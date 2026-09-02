@@ -1,0 +1,25 @@
+{
+  "name": "takehome-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@heroui/react": "^3.0.3",
+    "@heroui/styles": "^3.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.5.4",
+    "vite": "^6.0.0"
+  }
+}
