@@ -150,7 +150,7 @@ From the repository root:
 ```bash
 docker-compose up --build
 ```
-This starts PostgreSQL (port `5432`) and the Spring Boot backend (port `8080`).
+This starts PostgreSQL (port `5432`), the Spring Boot backend (port `8080`), and the React frontend (port `5173`). Open `http://localhost:5173` in your browser to access the application.
 
 ### 2. Run Locally
 
