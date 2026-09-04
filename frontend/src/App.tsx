@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppLayout from './components/layout/AppLayout';
 import ProductListPage from './features/products/ProductListPage';
 import ProductDetailPage from './features/products/ProductDetailPage';
 import OrderListPage from './features/orders/OrderListPage';
 import OrderDetailPage from './features/orders/OrderDetailPage';
-
+import StorefrontPage from './features/store/StorefrontPage';
+import StoreProductDetailPage from './features/store/StoreProductDetailPage';
 
 const USERS = [
-  { id: 1, name: 'Alice Martin', email: 'alice@marketnode.com' },
-  { id: 2, name: 'Bob Chen', email: 'bob@marketnode.com' },
-  { id: 3, name: 'Carol Smith', email: 'carol@marketnode.com' },
+  { id: 1, name: 'Alice Martin', email: 'alice@marketnode.com', role: 'STAFF' },
+  { id: 2, name: 'Bob Chen', email: 'bob@marketnode.com', role: 'CUSTOMER' },
+  { id: 3, name: 'Carol Smith', email: 'carol@marketnode.com', role: 'CUSTOMER' },
 ];
 
 function App() {
@@ -18,53 +19,91 @@ function App() {
   const [selectedOrderId, setSelectedOrderId] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState(USERS[0]);
 
+  // Reset page when user role changes to avoid getting stuck on a page not allowed for that role
+  useEffect(() => {
+    if (currentUser.role === 'STAFF') {
+      setPage('list');
+    } else {
+      setPage('storefront');
+    }
+  }, [currentUser]);
 
   const content = (() => {
-    if (page === 'detail' && selectedProductId) {
+    if (currentUser.role === 'CUSTOMER') {
+      if (page === 'store-detail' && selectedProductId) {
+        return (
+          <StoreProductDetailPage
+            id={selectedProductId}
+            userId={currentUser.id}
+            onBack={() => setPage('storefront')}
+            onOrderPlaced={(orderId: any) => {
+              setSelectedOrderId(orderId);
+              setPage('order-detail');
+            }}
+          />
+        );
+      }
+      if (page === 'order-detail' && selectedOrderId) {
+        return (
+          <OrderDetailPage
+            id={selectedOrderId}
+            onBack={() => setPage('orders')}
+          />
+        );
+      }
+      if (page === 'orders') {
+        return (
+          <OrderListPage
+            userId={currentUser.id}
+            onSelectOrder={(id: any) => {
+              setSelectedOrderId(id);
+              setPage('order-detail');
+            }}
+          />
+        );
+      }
       return (
-        <ProductDetailPage
-          id={selectedProductId}
-          onBack={() => setPage('list')}
+        <StorefrontPage
+          onSelectProduct={(id: any) => {
+            setSelectedProductId(id);
+            setPage('store-detail');
+          }}
         />
       );
-    }
-    if (page === 'order-detail' && selectedOrderId) {
+    } else {
+      // STAFF
+      if (page === 'detail' && selectedProductId) {
+        return (
+          <ProductDetailPage
+            id={selectedProductId}
+            onBack={() => setPage('list')}
+          />
+        );
+      }
       return (
-        <OrderDetailPage
-          id={selectedOrderId}
-          onBack={() => setPage('orders')}
-        />
-      );
-    }
-    if (page === 'orders') {
-      return (
-        <OrderListPage
-          userId={currentUser.id}
-          onSelectOrder={(id: any) => {
-            setSelectedOrderId(id);
-            setPage('order-detail');
+        <ProductListPage
+          onSelectProduct={(id: any) => {
+            setSelectedProductId(id);
+            setPage('detail');
           }}
         />
       );
     }
-    return (
-      <ProductListPage
-        onSelectProduct={(id: any) => {
-          setSelectedProductId(id);
-          setPage('detail');
-        }}
-      />
-    );
   })();
+
+  const activePage = page === 'orders' || page === 'order-detail' 
+    ? 'orders' 
+    : (currentUser.role === 'STAFF' ? 'inventory' : 'storefront');
 
   return (
     <AppLayout
       currentUser={currentUser}
       users={USERS}
       onUserChange={setCurrentUser}
-      activePage={page === 'orders' || page === 'order-detail' ? 'orders' : 'products'}
+      activePage={activePage}
       onNavigate={(navPage: string) => {
-        if (navPage === 'products') setPage('list');
+        if (navPage === 'inventory') setPage('list');
+        if (navPage === 'storefront') setPage('storefront');
         if (navPage === 'orders') setPage('orders');
       }}
     >
