@@ -91,8 +91,8 @@ function App() {
     }
   })();
 
-  const activePage = page === 'orders' || page === 'order-detail' 
-    ? 'orders' 
+  const activePage = page === 'orders' || page === 'order-detail'
+    ? 'orders'
     : (currentUser.role === 'STAFF' ? 'inventory' : 'storefront');
 
   return (
