@@ -33,15 +33,15 @@ Both systems share a single product catalog and PostgreSQL database. The IMS ser
 
 ### Key Engineering Decisions
 
-* **Concurrency-Safe Stock Deduction**: Rather than relying solely on application-level read-then-write checks, inventory deduction executes via an atomic conditional SQL update:
+* **Concurrency-Safe Stock Deduction**: Rather than relying on application-level read-then-write checks, inventory deduction executes via an atomic conditional SQL update:
   ```sql
   UPDATE product_entitiy
   SET stock = stock - :quantity
   WHERE id = :productId AND stock >= :quantity
   ```
-  The affected row count guarantees atomic reservation at the database level, preventing overselling race conditions under concurrent traffic.
+  The affected-row count (`1` = success, `0` = insufficient stock) acts as the invariant check, preventing overselling race conditions under concurrent requests without requiring application-level locks.
 * **Transactional Integrity**: Order placement and cancellation workflows are annotated with `@Transactional`. When placing an order, inventory deduction and order entity creation occur within the same atomic transaction boundary. If any step fails, changes roll back cleanly.
-* **Monetary Precision**: All unit prices and order totals use `BigDecimal` with explicit scale and rounding definitions to prevent IEEE 754 floating-point rounding errors common in currency arithmetic.
+* **Monetary Precision**: All monetary values use `BigDecimal` to avoid binary floating-point precision issues in currency calculations.
 * **Immutable Order Snapshots**: Orders capture `productName`, `unitPrice`, `quantity`, and `totalAmount` at purchase time. Subsequent edits to the product catalog do not mutate historical order records.
 * **Resilience to Catalog Deletions**: The `productId` reference in `orders` is nullable. If a product is later deleted from the active catalog, historical order records remain fully queryable and intact.
 * **Information Hiding (Storefront vs. Admin)**: The public storefront API (`/api/store/products`) maps products through `StoreProductResponse` DTOs, exposing only an `inStock` boolean indicator (`stock > 0`) without leaking internal warehouse stock quantities.

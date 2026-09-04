@@ -18,7 +18,7 @@ When multiple users simultaneously attempt to order items with limited remaining
 | **Atomic Conditional Update (Chosen)** | `UPDATE products SET stock = stock - :qty WHERE id = :id AND stock >= :qty` | Single atomic round-trip. Relies on the database's native row-level write lock. Returns affected row count (`1` = success, `0` = insufficient stock) without long lock hold times or retry loops. |
 
 ### Decision
-We implemented the **atomic conditional update** in `ProductRepo.java` (`deductStockIfAvailable`). This provides deterministic, race-condition-free stock deduction with minimal lock duration and zero retry complexity.
+We implemented the **atomic conditional update** in `ProductRepo.java` (`deductStockIfAvailable`). This provides deterministic stock deduction and avoids the explicit application-level locking and retry complexity associated with pessimistic/optimistic locking for this use case.
 
 ---
 
