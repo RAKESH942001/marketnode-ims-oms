@@ -41,7 +41,7 @@ export default function StoreProductDetailPage({ id, userId, onBack, onOrderPlac
 
   return (
     <div className="max-w-4xl mx-auto">
-      <Button variant="ghost" onPress={onBack} className="mb-6">
+      <Button variant="ghost" onClick={onBack} className="mb-6">
         &larr; Back to Storefront
       </Button>
 
@@ -102,7 +102,7 @@ export default function StoreProductDetailPage({ id, userId, onBack, onOrderPlac
                   variant="primary"
                   size="lg"
                   className="w-full mt-2 font-semibold shadow-md"
-                  onPress={handlePlaceOrder}
+                  onClick={handlePlaceOrder}
                 isDisabled={quantity < 1 || isOrdering}
                 >
                   {isOrdering ? 'Processing...' : 'Place Order'}

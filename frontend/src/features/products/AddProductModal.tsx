@@ -51,8 +51,8 @@ export default function AddProductModal({ isOpen, onClose, onCreated }: any) {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="outline" onPress={onClose}>Cancel</Button>
-              <Button variant="primary" onPress={handleSubmit}>Save</Button>
+              <Button variant="outline" onClick={onClose}>Cancel</Button>
+              <Button variant="primary" onClick={handleSubmit}>Save</Button>
             </Modal.Footer>
           </Modal.Dialog>
         </Modal.Container>

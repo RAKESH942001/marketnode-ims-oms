@@ -20,7 +20,7 @@ export default function ProductListPage({ onSelectProduct }: any) {
     <div>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Products</h1>
-        <Button variant="primary" onPress={() => setAddOpen(true)}>
+        <Button variant="primary" onClick={() => setAddOpen(true)}>
           + Add Product
         </Button>
       </div>

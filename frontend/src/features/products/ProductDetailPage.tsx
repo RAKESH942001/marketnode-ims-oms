@@ -48,7 +48,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
 
   return (
     <div className="max-w-2xl">
-      <Button variant="ghost" onPress={onBack} className="mb-4">
+      <Button variant="ghost" onClick={onBack} className="mb-4">
         ← Back to products
       </Button>
 
@@ -60,7 +60,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
               <Chip.Label>Stock: {product.stock}</Chip.Label>
             </Chip>
             {!isEditing && (
-              <Button size="sm" variant="outline" onPress={handleEdit}>Edit</Button>
+              <Button size="sm" variant="outline" onClick={handleEdit}>Edit</Button>
             )}
           </div>
         </Card.Header>
@@ -97,8 +97,8 @@ export default function ProductDetailPage({ id, onBack }: any) {
                 />
               </TextField>
               <div className="flex gap-2">
-                <Button variant="primary" onPress={handleUpdate}>Save Changes</Button>
-                <Button variant="outline" onPress={handleCancelEdit}>Cancel</Button>
+                <Button variant="primary" onClick={handleUpdate}>Save Changes</Button>
+                <Button variant="outline" onClick={handleCancelEdit}>Cancel</Button>
               </div>
             </>
           ) : (
@@ -138,7 +138,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
                 onChange={(e: any) => setStockAmount(e.target.value)}
               />
             </TextField>
-            <Button variant="primary" onPress={handleStockAdjust}>Adjust</Button>
+            <Button variant="primary" onClick={handleStockAdjust}>Adjust</Button>
           </div>
         </Card.Content>
       </Card>

@@ -42,7 +42,7 @@ export default function OrderDetailPage({ id, onBack }: { id: number, onBack: ()
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-4">
-        <Button variant="ghost" onPress={onBack} size="sm">
+        <Button variant="ghost" onClick={onBack} size="sm">
           &larr; Back to Orders
         </Button>
       </div>
@@ -53,7 +53,7 @@ export default function OrderDetailPage({ id, onBack }: { id: number, onBack: ()
           <Button
            variant="outline"
   className="text-red-600 border-red-600 hover:bg-red-50"
-  onPress={handleCancel}
+  onClick={handleCancel}
   isDisabled={isCancelling}
           >
            {isCancelling ? "Cancelling..." : "Cancel Order"}
