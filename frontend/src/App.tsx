@@ -14,6 +14,7 @@ function App() {
   const [selectedProductId, setSelectedProductId] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState(USERS[0]);
 
+
   const content = (() => {
     if (page === 'detail' && selectedProductId) {
       return (
