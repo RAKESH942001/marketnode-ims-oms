@@ -34,3 +34,9 @@ export const cancelOrder = async (orderId: number): Promise<Order> => {
   if (!response.ok) throw new Error('Failed to cancel order');
   return response.json();
 };
+
+export const fetchOrderById = async (orderId: number): Promise<Order> => {
+  const response = await fetch(`/api/orders/${orderId}`);
+  if (!response.ok) throw new Error('Failed to fetch order');
+  return response.json();
+};
