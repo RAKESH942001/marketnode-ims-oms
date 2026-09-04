@@ -42,7 +42,7 @@ export default function OrderDetailPage({ id, onBack }: { id: number, onBack: ()
   return (
     <div className="max-w-4xl">
       <div className="mb-6">
-        <Button variant="flat" onClick={onBack} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
+        <Button variant="outline" onClick={onBack} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
           &larr; Back to Orders
         </Button>
       </div>
@@ -51,13 +51,13 @@ export default function OrderDetailPage({ id, onBack }: { id: number, onBack: ()
         <h1 className="text-3xl font-bold text-gray-800">Order <span className="text-blue-600">#{order.id}</span></h1>
         {order.status === 'CREATED' && (
           <Button
-           variant="flat"
-           className="text-red-600 bg-white border border-red-200 hover:bg-red-50 hover:border-red-300 shadow-sm rounded-full px-6 font-medium transition-all"
-           onClick={handleCancel}
-           isDisabled={isCancelling}
-           isLoading={isCancelling}
+            variant="outline"
+            className="text-red-600 bg-white border border-red-200 hover:bg-red-50 hover:border-red-300 shadow-sm rounded-full px-6 font-medium transition-all"
+            onClick={handleCancel}
+            isDisabled={isCancelling}
+
           >
-           {isCancelling ? "Cancelling..." : "Cancel Order"}
+            {isCancelling ? "Cancelling..." : "Cancel Order"}
           </Button>
         )}
       </div>

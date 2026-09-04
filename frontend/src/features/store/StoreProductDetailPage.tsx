@@ -41,7 +41,11 @@ export default function StoreProductDetailPage({ id, userId, onBack, onOrderPlac
 
   return (
     <div className="max-w-5xl">
-      <Button variant="flat" onClick={onBack} className="mb-8 bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
+     <Button
+  variant="ghost"
+  onClick={onBack}
+  className="mb-8 bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all"
+>
         &larr; Back to Storefront
       </Button>
 
@@ -104,7 +108,6 @@ export default function StoreProductDetailPage({ id, userId, onBack, onOrderPlac
                   className="w-full mt-4 font-semibold shadow-md bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:opacity-90 transition-opacity"
                   onClick={handlePlaceOrder}
                   isDisabled={quantity < 1 || isOrdering}
-                  isLoading={isOrdering}
                 >
                   {isOrdering ? 'Processing...' : 'Place Order'}
                 </Button>

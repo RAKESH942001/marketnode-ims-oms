@@ -23,7 +23,7 @@ export default function StorefrontPage({ onSelectProduct }: any) {
   if (error) return <div className="text-danger">{error}</div>;
 
   if (products.length === 0) {
-    return <EmptyState message ="No Products Available. Check back later for new arrivals." />;
+    return <EmptyState message="No Products Available. Check back later for new arrivals." />;
   }
 
   return (
@@ -49,7 +49,16 @@ export default function StorefrontPage({ onSelectProduct }: any) {
               </p>
               <div className="mt-4 pt-4 border-t border-blue-100 flex flex-col justify-between items-start gap-4">
                 <span className="text-2xl font-bold text-blue-700">${p.price.toFixed(2)}</span>
-                <Button size="sm" className={p.inStock ? 'w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full font-medium' : 'w-full rounded-full font-medium'} variant={p.inStock ? 'solid' : 'flat'} isDisabled={!p.inStock}>
+                <Button
+                  size="sm"
+                  className={
+                    p.inStock
+                      ? 'w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full font-medium'
+                      : 'w-full rounded-full font-medium'
+                  }
+                  variant={p.inStock ? 'primary' : 'tertiary'}
+                  isDisabled={!p.inStock}
+                >
                   {p.inStock ? 'View Details' : 'Unavailable'}
                 </Button>
               </div>
