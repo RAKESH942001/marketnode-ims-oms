@@ -20,8 +20,8 @@ export default function OrderListPage({ userId, onSelectOrder }: { userId: numbe
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-semibold">My Orders</h1>
+      <div className="flex justify-between items-center mb-8 px-2">
+        <h1 className="text-3xl font-bold text-gray-800">My Orders</h1>
       </div>
 
       {error ? (
@@ -33,38 +33,40 @@ export default function OrderListPage({ userId, onSelectOrder }: { userId: numbe
           You haven't placed any orders yet.
         </div>
       ) : (
-        <Table>
-          <Table.ScrollContainer>
-            <Table.Content aria-label="Orders table">
-              <Table.Header>
-                <Table.Column isRowHeader>ORDER ID</Table.Column>
-                <Table.Column>PRODUCT</Table.Column>
-                <Table.Column>QTY</Table.Column>
-                <Table.Column>TOTAL AMOUNT</Table.Column>
-                <Table.Column>STATUS</Table.Column>
-                <Table.Column>DATE</Table.Column>
-              </Table.Header>
-              <Table.Body>
-                {orders.map((o) => (
-                  <Table.Row key={o.id} className="cursor-pointer hover:bg-default-100" onAction={() => onSelectOrder(o.id)}>
-                    <Table.Cell>#{o.id}</Table.Cell>
-                    <Table.Cell className="font-medium">{o.productName}</Table.Cell>
-                    <Table.Cell>{o.quantity}</Table.Cell>
-                    <Table.Cell>${o.totalAmount?.toFixed(2)}</Table.Cell>
-                    <Table.Cell>
-                      <Chip size="sm" color={o.status === 'CREATED' ? 'success' : 'default'} variant="soft">
-                        {o.status}
-                      </Chip>
-                    </Table.Cell>
-                    <Table.Cell className="text-default-500">
-                      {new Date(o.createdAt).toLocaleDateString()}
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Content>
-          </Table.ScrollContainer>
-        </Table>
+        <div className="shadow-md border border-blue-100 rounded-3xl overflow-hidden bg-white">
+          <Table>
+            <Table.ScrollContainer>
+              <Table.Content aria-label="Orders table">
+                <Table.Header>
+                  <Table.Column isRowHeader>ORDER ID</Table.Column>
+                  <Table.Column>PRODUCT</Table.Column>
+                  <Table.Column>QTY</Table.Column>
+                  <Table.Column>TOTAL AMOUNT</Table.Column>
+                  <Table.Column>STATUS</Table.Column>
+                  <Table.Column>DATE</Table.Column>
+                </Table.Header>
+                <Table.Body>
+                  {orders.map((o) => (
+                    <Table.Row key={o.id} className="cursor-pointer hover:bg-blue-50 transition-colors" onClick={() => onSelectOrder(o.id)}>
+                      <Table.Cell className="font-medium text-blue-600">#{o.id}</Table.Cell>
+                      <Table.Cell className="font-semibold text-gray-800">{o.productName}</Table.Cell>
+                      <Table.Cell>{o.quantity}</Table.Cell>
+                      <Table.Cell className="font-medium">${o.totalAmount?.toFixed(2)}</Table.Cell>
+                      <Table.Cell>
+                        <Chip size="sm" color={o.status === 'CREATED' ? 'success' : 'default'} variant="soft">
+                          {o.status}
+                        </Chip>
+                      </Table.Cell>
+                      <Table.Cell className="text-gray-500">
+                        {new Date(o.createdAt).toLocaleDateString()}
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Content>
+            </Table.ScrollContainer>
+          </Table>
+        </div>
       )}
     </div>
   );

@@ -48,23 +48,25 @@ export default function ProductDetailPage({ id, onBack }: any) {
 
   return (
     <div className="max-w-2xl">
-      <Button variant="ghost" onClick={onBack} className="mb-4">
-        ← Back to products
-      </Button>
+      <div className="mb-6">
+        <Button variant="flat" onClick={onBack} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
+          &larr; Back to Products
+        </Button>
+      </div>
 
-      <Card className="mb-6">
-        <Card.Header className="flex justify-between items-center">
-          <Card.Title>Product Detail</Card.Title>
-          <div className="flex items-center gap-2">
-            <Chip size="sm" color={product.stock > 0 ? 'success' : 'danger'}>
-              <Chip.Label>Stock: {product.stock}</Chip.Label>
+      <Card className="mb-8 shadow-sm border border-blue-100 rounded-3xl overflow-hidden bg-gradient-to-br from-white to-blue-50/40">
+        <Card.Header className="flex justify-between items-center p-6 bg-white/50 border-b border-blue-50">
+          <Card.Title className="text-xl font-bold text-gray-800">Product Detail</Card.Title>
+          <div className="flex items-center gap-3">
+            <Chip size="sm" color={product.stock > 0 ? 'success' : 'danger'} variant="soft" className="shadow-sm">
+              Stock: {product.stock}
             </Chip>
             {!isEditing && (
-              <Button size="sm" variant="outline" onClick={handleEdit}>Edit</Button>
+              <Button size="sm" variant="flat" className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 shadow-sm rounded-full font-medium" onClick={handleEdit}>Edit Details</Button>
             )}
           </div>
         </Card.Header>
-        <Card.Content className="flex flex-col gap-4">
+        <Card.Content className="flex flex-col gap-6 p-6">
           {isEditing ? (
             <>
               <TextField>
@@ -96,39 +98,39 @@ export default function ProductDetailPage({ id, onBack }: any) {
                   onChange={(e: any) => setEditData({ ...editData, price: Number(e.target.value) })}
                 />
               </TextField>
-              <div className="flex gap-2">
-                <Button variant="primary" onClick={handleUpdate}>Save Changes</Button>
-                <Button variant="outline" onClick={handleCancelEdit}>Cancel</Button>
+              <div className="flex gap-3 pt-4">
+                <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full font-medium px-6" onClick={handleUpdate}>Save Changes</Button>
+                <Button variant="flat" className="bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 shadow-sm rounded-full px-6 font-medium" onClick={handleCancelEdit}>Cancel</Button>
               </div>
             </>
           ) : (
             <>
               <div>
-                <p className="text-sm text-default-500">Name</p>
-                <p className="font-medium">{product.name}</p>
+                <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Name</p>
+                <p className="font-semibold text-lg text-gray-800">{product.name}</p>
               </div>
               <div>
-                <p className="text-sm text-default-500">Category</p>
-                <p>{product.category || '—'}</p>
+                <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Category</p>
+                <p className="font-medium text-gray-700">{product.category || '—'}</p>
               </div>
               <div>
-                <p className="text-sm text-default-500">Description</p>
-                <p>{product.description || '—'}</p>
+                <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Description</p>
+                <p className="text-gray-600">{product.description || '—'}</p>
               </div>
               <div>
-                <p className="text-sm text-default-500">Price</p>
-                <p className="font-medium">${product.price?.toFixed(2)}</p>
+                <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Price</p>
+                <p className="font-bold text-xl text-blue-600">${product.price?.toFixed(2)}</p>
               </div>
             </>
           )}
         </Card.Content>
       </Card>
 
-      <Card>
-        <Card.Header>
-          <Card.Title>Adjust Stock</Card.Title>
+      <Card className="shadow-sm border border-blue-100 rounded-3xl overflow-hidden bg-gradient-to-br from-white to-gray-50/50">
+        <Card.Header className="p-6 pb-2">
+          <Card.Title className="text-xl font-bold text-gray-800">Adjust Stock</Card.Title>
         </Card.Header>
-        <Card.Content>
+        <Card.Content className="p-6 pt-2">
           <div className="flex gap-3 items-end">
             <TextField>
               <Label>Amount</Label>
@@ -138,7 +140,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
                 onChange={(e: any) => setStockAmount(e.target.value)}
               />
             </TextField>
-            <Button variant="primary" onClick={handleStockAdjust}>Adjust</Button>
+            <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full font-medium px-6 h-[40px]" onClick={handleStockAdjust}>Adjust</Button>
           </div>
         </Card.Content>
       </Card>

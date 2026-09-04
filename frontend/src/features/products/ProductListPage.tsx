@@ -18,43 +18,45 @@ export default function ProductListPage({ onSelectProduct }: any) {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-semibold">Products</h1>
-        <Button variant="primary" onClick={() => setAddOpen(true)}>
+      <div className="flex justify-between items-center mb-8 px-2">
+        <h1 className="text-3xl font-bold text-gray-800">Products</h1>
+        <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full px-6 font-medium" onClick={() => setAddOpen(true)}>
           + Add Product
         </Button>
       </div>
 
-      <Table>
-        <Table.ScrollContainer>
-          <Table.Content aria-label="Products table">
-            <Table.Header>
-              <Table.Column isRowHeader>ID</Table.Column>
-              <Table.Column>NAME</Table.Column>
-              <Table.Column>CATEGORY</Table.Column>
-              <Table.Column>DESCRIPTION</Table.Column>
-              <Table.Column>PRICE</Table.Column>
-              <Table.Column>STOCK</Table.Column>
-            </Table.Header>
-            <Table.Body>
-              {products.map((p: any) => (
-                <Table.Row key={p.id} className="cursor-pointer" onAction={() => onSelectProduct(p.id)}>
-                  <Table.Cell>{p.id}</Table.Cell>
-                  <Table.Cell className="font-medium">{p.name}</Table.Cell>
-                  <Table.Cell>{p.category || '—'}</Table.Cell>
-                  <Table.Cell className="text-default-500">{p.description || '—'}</Table.Cell>
-                  <Table.Cell>${p.price?.toFixed(2)}</Table.Cell>
-                  <Table.Cell>
-                    <Chip size="sm" color={p.stock > 0 ? 'success' : 'danger'}>
-                      <Chip.Label>{p.stock}</Chip.Label>
-                    </Chip>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Content>
-        </Table.ScrollContainer>
-      </Table>
+      <div className="shadow-md border border-blue-100 rounded-3xl overflow-hidden bg-white">
+        <Table>
+          <Table.ScrollContainer>
+            <Table.Content aria-label="Products table">
+              <Table.Header>
+                <Table.Column isRowHeader>ID</Table.Column>
+                <Table.Column>NAME</Table.Column>
+                <Table.Column>CATEGORY</Table.Column>
+                <Table.Column>DESCRIPTION</Table.Column>
+                <Table.Column>PRICE</Table.Column>
+                <Table.Column>STOCK</Table.Column>
+              </Table.Header>
+              <Table.Body>
+                {products.map((p: any) => (
+                  <Table.Row key={p.id} className="cursor-pointer hover:bg-blue-50 transition-colors" onClick={() => onSelectProduct(p.id)}>
+                    <Table.Cell className="font-medium text-blue-600">{p.id}</Table.Cell>
+                    <Table.Cell className="font-semibold text-gray-800">{p.name}</Table.Cell>
+                    <Table.Cell>{p.category || '—'}</Table.Cell>
+                    <Table.Cell className="text-gray-500">{p.description || '—'}</Table.Cell>
+                    <Table.Cell className="font-medium">${p.price?.toFixed(2)}</Table.Cell>
+                    <Table.Cell>
+                      <Chip size="sm" color={p.stock > 0 ? 'success' : 'danger'} variant="soft">
+                        <Chip.Label>{p.stock}</Chip.Label>
+                      </Chip>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Content>
+          </Table.ScrollContainer>
+        </Table>
+      </div>
 
       <AddProductModal
         isOpen={isAddOpen}

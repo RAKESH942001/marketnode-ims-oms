@@ -40,28 +40,29 @@ export default function OrderDetailPage({ id, onBack }: { id: number, onBack: ()
   if (error || !order) return <div className="text-danger p-4 bg-danger-50 rounded-lg">{error || 'Order not found'}</div>;
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="mb-4">
-        <Button variant="ghost" onClick={onBack} size="sm">
+    <div className="max-w-4xl">
+      <div className="mb-6">
+        <Button variant="flat" onClick={onBack} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
           &larr; Back to Orders
         </Button>
       </div>
 
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Order #{order.id}</h1>
+      <div className="flex justify-between items-center mb-8 px-2">
+        <h1 className="text-3xl font-bold text-gray-800">Order <span className="text-blue-600">#{order.id}</span></h1>
         {order.status === 'CREATED' && (
           <Button
-           variant="outline"
-  className="text-red-600 border-red-600 hover:bg-red-50"
-  onClick={handleCancel}
-  isDisabled={isCancelling}
+           variant="flat"
+           className="text-red-600 bg-white border border-red-200 hover:bg-red-50 hover:border-red-300 shadow-sm rounded-full px-6 font-medium transition-all"
+           onClick={handleCancel}
+           isDisabled={isCancelling}
+           isLoading={isCancelling}
           >
            {isCancelling ? "Cancelling..." : "Cancel Order"}
           </Button>
         )}
       </div>
 
-      <Card>
+      <Card className="shadow-md border border-blue-100 rounded-3xl overflow-hidden bg-gradient-to-br from-white to-blue-50/40">
         <div className="p-6">
           <div className="grid grid-cols-2 gap-y-6 gap-x-8">
             <div>
@@ -76,27 +77,27 @@ export default function OrderDetailPage({ id, onBack }: { id: number, onBack: ()
             </div>
 
             <div className="col-span-2">
-              <hr className="my-2 border-default-200" />
+              <hr className="my-3 border-blue-100" />
             </div>
 
             <div>
-              <p className="text-sm text-default-500 font-medium mb-1">Product</p>
-              <p className="font-medium text-lg">{order.productName}</p>
+              <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Product</p>
+              <p className="font-semibold text-xl text-gray-800">{order.productName}</p>
             </div>
 
             <div>
-              <p className="text-sm text-default-500 font-medium mb-1">Quantity</p>
-              <p className="font-medium">{order.quantity}</p>
+              <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Quantity</p>
+              <p className="font-medium text-lg">{order.quantity}</p>
             </div>
 
             <div>
-              <p className="text-sm text-default-500 font-medium mb-1">Unit Price</p>
-              <p className="font-medium">${order.unitPrice?.toFixed(2)}</p>
+              <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Unit Price</p>
+              <p className="font-medium text-lg">${order.unitPrice?.toFixed(2)}</p>
             </div>
 
             <div>
-              <p className="text-sm text-default-500 font-medium mb-1">Total Amount</p>
-              <p className="font-semibold text-xl text-primary">${order.totalAmount?.toFixed(2)}</p>
+              <p className="text-xs text-blue-500 font-bold tracking-wider uppercase mb-1">Total Amount</p>
+              <p className="font-bold text-2xl text-blue-600">${order.totalAmount?.toFixed(2)}</p>
             </div>
           </div>
         </div>
