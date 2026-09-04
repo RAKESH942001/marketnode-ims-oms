@@ -1,3 +1,30 @@
 # AI Prompt Log
 # Append a numbered entry for every AI interaction in the order they occurred.
 # See TASKS.md for the required format.
+
+---
+timestamp: 2026-09-04T08:00:00Z
+model: Claude 3.5 Sonnet
+prompt: |
+  Review the Order Management System (OMS) requirements in PRODUCT.md and help implement the storefront, order placement, order history, and cancellation workflows while keeping IMS intact.
+---
+timestamp: 2026-09-04T09:15:00Z
+model: Claude 3.5 Sonnet
+prompt: |
+  Analyze the current fullstack architecture. Ensure order routing redirects to the order history list and that orders are properly filtered by user ID.
+---
+timestamp: 2026-09-04T10:30:00Z
+model: Claude 3.5 Sonnet
+prompt: |
+  How to prevent race conditions during concurrent order placement? Implement an atomic conditional database update (UPDATE products SET stock = stock - :qty WHERE id = :id AND stock >= :qty) instead of check-then-act.
+---
+timestamp: 2026-09-04T12:00:00Z
+model: Claude 3.5 Sonnet
+prompt: |
+  Implement request DTO validation with Bean Validation, standardize global REST error responses with ApiErrorResponse, and add automated unit tests for all OrderService business rules.
+---
+timestamp: 2026-09-04T14:30:00Z
+model: Claude 3.5 Sonnet
+prompt: |
+  Create comprehensive documentation including README.md with architecture and concurrency diagrams, and DESIGN_DECISIONS.md explaining consistency boundaries, atomic updates, and trade-offs.
+---

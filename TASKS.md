@@ -82,3 +82,29 @@ prompt: |
 
 - Running system via `docker-compose up` from the repository root
 - `ai-prompt.log`
+
+---
+
+## Implementation Checklist
+
+### Core Functional Requirements
+- [x] Product catalog (`/api/store/products` & storefront screen)
+- [x] Product detail (`/api/store/products/{id}` & store detail screen)
+- [x] Order placement (`POST /api/orders`)
+- [x] Order history (`GET /api/orders?userId={id}` & My Orders screen)
+- [x] Order cancellation with stock restoration (`POST /api/orders/{id}/cancel`)
+- [x] Immutable historical order snapshots (`productName`, `unitPrice`, `totalAmount`)
+- [x] Resilience to catalog deletions (`productId` nullable in order records)
+- [x] Stock validation (zero-floor enforcement)
+- [x] Multi-user order isolation
+
+### Production Hardening & Architecture
+- [x] Concurrency-safe atomic conditional inventory deduction (`UPDATE ... WHERE stock >= :quantity`)
+- [x] Database transaction boundaries (`@Transactional`)
+- [x] Monetary precision with `java.math.BigDecimal`
+- [x] Request payload Bean Validation (`@Valid CreateOrderRequest`)
+- [x] Centralized REST error contract (`ApiErrorResponse` with HTTP status codes)
+- [x] Database indexing on `orders(user_id)`
+- [x] Business rule automated unit tests (`OrderServiceTest`)
+- [x] Structured business logging with SLF4J
+- [x] Information hiding: Storefront hides exact inventory counts via `StoreProductResponse`
