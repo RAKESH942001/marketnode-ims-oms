@@ -2,6 +2,7 @@ package com.example.inventorymngt.service;
 
 import com.example.inventorymngt.entity.ProductEntitiy;
 import com.example.inventorymngt.entity.ProductRepo;
+import com.example.inventorymngt.exception.InsufficientStockException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,9 +41,22 @@ public class ProductService {
         productRepo.deleteById(id);
     }
 
+//    public ProductEntitiy adjustStock(Long id, Integer amount) {
+//        ProductEntitiy product = productRepo.findById(id).orElseThrow();
+//        product.setStock(product.getStock() + amount);
+//        return productRepo.save(product);
+//    }
+
+
     public ProductEntitiy adjustStock(Long id, Integer amount) {
         ProductEntitiy product = productRepo.findById(id).orElseThrow();
-        product.setStock(product.getStock() + amount);
+
+        int newStock = product.getStock() + amount;
+        if (newStock < 0) {
+            throw new InsufficientStockException("Cannot reduce stock below zero. Current stock: " + product.getStock());
+        }
+
+        product.setStock(newStock);
         return productRepo.save(product);
     }
 }
