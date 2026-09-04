@@ -36,9 +36,8 @@ function App() {
             id={selectedProductId}
             userId={currentUser.id}
             onBack={() => setPage('storefront')}
-            onOrderPlaced={(orderId: any) => {
-              setSelectedOrderId(orderId);
-              setPage('order-detail');
+            onOrderPlaced={() => {
+              setPage('orders');
             }}
           />
         );

@@ -16,7 +16,7 @@ export const placeOrder = async (userId: number, productId: number, quantity: nu
   });
   if (!response.ok) {
     const errorData = await response.json().catch(() => null);
-    throw new Error(errorData?.error || 'Failed to place order');
+    throw new Error(errorData?.message || errorData?.error || 'Failed to place order');
   }
   return response.json();
 };
