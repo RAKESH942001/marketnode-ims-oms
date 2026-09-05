@@ -8,12 +8,12 @@ export default function TopBar({ currentUser, users, onUserChange }: any) {
       </div>
       <Dropdown>
         <Dropdown.Trigger>
-          <button className="flex items-center gap-2 cursor-pointer outline-none">
+          <div className="flex items-center gap-2 cursor-pointer outline-none" role="button" tabIndex={0}>
             <span className="text-sm text-default-500">{currentUser.email}</span>
             <Avatar size="sm">
               <Avatar.Fallback>{currentUser.name.charAt(0)}</Avatar.Fallback>
             </Avatar>
-          </button>
+          </div>
         </Dropdown.Trigger>
         <Dropdown.Popover>
           <Dropdown.Menu onAction={(key: any) => {

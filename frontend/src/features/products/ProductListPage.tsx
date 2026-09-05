@@ -36,10 +36,11 @@ export default function ProductListPage({ onSelectProduct }: any) {
                 <Table.Column>DESCRIPTION</Table.Column>
                 <Table.Column>PRICE</Table.Column>
                 <Table.Column>STOCK</Table.Column>
+                <Table.Column>ACTIONS</Table.Column>
               </Table.Header>
               <Table.Body>
                 {products.map((p: any) => (
-                  <Table.Row key={p.id} className="cursor-pointer hover:bg-blue-50 transition-colors" onClick={() => onSelectProduct(p.id)}>
+                  <Table.Row key={p.id} className="cursor-pointer hover:bg-blue-50 transition-colors">
                     <Table.Cell className="font-medium text-blue-600">{p.id}</Table.Cell>
                     <Table.Cell className="font-semibold text-gray-800">{p.name}</Table.Cell>
                     <Table.Cell>{p.category || '—'}</Table.Cell>
@@ -49,6 +50,9 @@ export default function ProductListPage({ onSelectProduct }: any) {
                       <Chip size="sm" color={p.stock > 0 ? 'success' : 'danger'} variant="soft">
                         <Chip.Label>{p.stock}</Chip.Label>
                       </Chip>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Button size="sm" variant="outline" onPress={() => onSelectProduct(p.id)}>View</Button>
                     </Table.Cell>
                   </Table.Row>
                 ))}

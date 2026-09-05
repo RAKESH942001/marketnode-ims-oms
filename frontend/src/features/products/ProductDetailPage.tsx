@@ -49,7 +49,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
   return (
     <div className="max-w-2xl">
       <div className="mb-6">
-        <Button variant="flat" onClick={onBack} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
+        <Button variant="outline" onClick={onBack} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm font-medium rounded-full px-6 transition-all">
           &larr; Back to Products
         </Button>
       </div>
@@ -62,7 +62,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
               Stock: {product.stock}
             </Chip>
             {!isEditing && (
-              <Button size="sm" variant="flat" className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 shadow-sm rounded-full font-medium" onClick={handleEdit}>Edit Details</Button>
+              <Button size="sm" variant="outline" className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 shadow-sm rounded-full font-medium" onClick={handleEdit}>Edit Details</Button>
             )}
           </div>
         </Card.Header>
@@ -100,7 +100,7 @@ export default function ProductDetailPage({ id, onBack }: any) {
               </TextField>
               <div className="flex gap-3 pt-4">
                 <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full font-medium px-6" onClick={handleUpdate}>Save Changes</Button>
-                <Button variant="flat" className="bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 shadow-sm rounded-full px-6 font-medium" onClick={handleCancelEdit}>Cancel</Button>
+                <Button variant="outline" className="bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 shadow-sm rounded-full px-6 font-medium" onClick={handleCancelEdit}>Cancel</Button>
               </div>
             </>
           ) : (

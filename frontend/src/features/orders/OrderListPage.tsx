@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, Chip } from '@heroui/react';
+import { Table, Chip, Button } from '@heroui/react';
 import { fetchUserOrders, Order } from '../../api/orders';
 
 export default function OrderListPage({ userId, onSelectOrder }: { userId: number, onSelectOrder: (id: number) => void }) {
@@ -44,21 +44,25 @@ export default function OrderListPage({ userId, onSelectOrder }: { userId: numbe
                   <Table.Column>TOTAL AMOUNT</Table.Column>
                   <Table.Column>STATUS</Table.Column>
                   <Table.Column>DATE</Table.Column>
+                  <Table.Column>ACTIONS</Table.Column>
                 </Table.Header>
                 <Table.Body>
                   {orders.map((o) => (
-                    <Table.Row key={o.id} className="cursor-pointer hover:bg-blue-50 transition-colors" onClick={() => onSelectOrder(o.id)}>
+                    <Table.Row key={o.id} className="cursor-pointer hover:bg-blue-50 transition-colors">
                       <Table.Cell className="font-medium text-blue-600">#{o.id}</Table.Cell>
                       <Table.Cell className="font-semibold text-gray-800">{o.productName}</Table.Cell>
                       <Table.Cell>{o.quantity}</Table.Cell>
                       <Table.Cell className="font-medium">${o.totalAmount?.toFixed(2)}</Table.Cell>
                       <Table.Cell>
-                        <Chip size="sm" color={o.status === 'CREATED' ? 'success' : 'default'} variant="soft">
+                        <Chip size="sm" color={o.status === 'CREATED' ? 'success' : o.status === 'CANCELLED' ? 'danger' : 'default'} variant="soft">
                           {o.status}
                         </Chip>
                       </Table.Cell>
                       <Table.Cell className="text-gray-500">
                         {new Date(o.createdAt).toLocaleDateString()}
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Button size="sm" variant="outline" onPress={() => onSelectOrder(o.id)}>View</Button>
                       </Table.Cell>
                     </Table.Row>
                   ))}

@@ -51,7 +51,7 @@ export default function AddProductModal({ isOpen, onClose, onCreated }: any) {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="flat" className="bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 shadow-sm rounded-full px-6 font-medium" onClick={onClose}>Cancel</Button>
+              <Button variant="outline" className="bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 shadow-sm rounded-full px-6 font-medium" onClick={onClose}>Cancel</Button>
               <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md rounded-full px-6 font-medium" onClick={handleSubmit}>Save</Button>
             </Modal.Footer>
           </Modal.Dialog>
